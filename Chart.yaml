@@ -9,3 +9,9 @@ dependencies:
     version: "0.10.0"
     repository: "https://charts.external-secrets.io"
     #"https://external-secrets.github.io/kubernetes-external-secrets"
+
+home: https://github.com/validatedpatterns/golang-external-secrets-chart
+maintainers:
+  - name: Validated Patterns Team
+    email: validatedpatterns@googlegroups.com
+icon: https://validatedpatterns.io/images/validated-patterns.png
