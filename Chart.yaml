@@ -4,12 +4,6 @@ keywords:
 - pattern
 name: golang-external-secrets
 version: 0.1.2
-dependencies:
-  - name: external-secrets
-    version: "0.10.0"
-    repository: "https://charts.external-secrets.io"
-    #"https://external-secrets.github.io/kubernetes-external-secrets"
-
 home: https://github.com/validatedpatterns/golang-external-secrets-chart
 maintainers:
   - name: Validated Patterns Team

@@ -5,7 +5,32 @@
 
 {{ template "chart.description" . }}
 
-This chart is used by the Validated Patterns to set up the external secrets
+This chart is used by the Validated Patterns to set up the external secrets. This chart
+sets up the needed pieces for ESO to work with the Validated Patterns Framework.
+
+**Note** this version uses the ESO operator. Since we prefer using UBI images, we need
+to manually update the ESO UBI images in the `values.yaml` file when updating.
+This requires that the operator is installed via the VP subscriptions mechanism.
+
+Here is a full example:
+```yaml
+clusterGroup:
+  namespaces:
+    - golang-external-secrets
+  subscriptions:
+    golang-external-secrets:
+      channel: alpha
+      name: external-secrets-operator
+      namespace: golang-external-secrets
+      source: community-operators
+  applications:
+    golang-external-secrets:
+      name: golang-external-secrets
+      namespace: golang-external-secrets
+      project: hub
+      chart: golang-external-secrets
+      chartVersion: 0.2.*
+```
 
 {{ template "chart.homepageLine" . }}
 
@@ -18,19 +43,3 @@ This chart is used by the Validated Patterns to set up the external secrets
 {{ template "chart.valuesSection" . }}
 
 {{ template "helm-docs.versionFooter" . }}
-
-
-## Subchart Update
-
-When updating this sub-chart, please remember to tweak the image tag in values.yaml.
-That is because we want to use -ubi images if possible and there is no suffix option, so
-we just override the tag with the version + "-ubi"
-
-### Steps
-
-1. Edit the version in Chart.yaml
-2. Run `helm dependency update .`
-3. Run `./update-helm-dependency.sh`
-4. Tweak `values.yaml` with the new image versions
-5. Run `make test`
-6. Commit to Git
