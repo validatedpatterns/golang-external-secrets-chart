@@ -3,7 +3,7 @@ description: A Helm chart to configure the golang-based external-secrets.
 keywords:
 - pattern
 name: golang-external-secrets
-version: 0.1.2
+version: 0.2.0
 home: https://github.com/validatedpatterns/golang-external-secrets-chart
 maintainers:
   - name: Validated Patterns Team
