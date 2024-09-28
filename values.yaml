@@ -71,12 +71,12 @@ clusterGroup:
 external-secrets:
   image:
     # -- Tag for the ESO main image
-    tag: v0.10.0-ubi
+    tag: v0.10.2-ubi
   webhook:
     image:
     # -- Tag for the ESO webhook image
-      tag: v0.10.0-ubi
+      tag: v0.10.2-ubi
   certController:
     image:
     # -- Tag for the ESO certController image
-      tag: v0.10.0-ubi
+      tag: v0.10.2-ubi
