@@ -68,14 +68,15 @@ clusterGroup:
 
 # -- A few settings containing which images are being used
 # @default -- depends on the individual settings
-image:
-  # -- Tag for the ESO main image
-  tag: v0.10.4-ubi
-webhook:
+external-secrets:
   image:
+    # -- Tag for the ESO main image
+    tag: v0.10.0-ubi
+  webhook:
+    image:
     # -- Tag for the ESO webhook image
-    tag: v0.10.4-ubi
-certController:
-  image:
+      tag: v0.10.0-ubi
+  certController:
+    image:
     # -- Tag for the ESO certController image
-    tag: v0.10.4-ubi
+      tag: v0.10.0-ubi
