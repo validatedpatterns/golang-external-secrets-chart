@@ -3,10 +3,10 @@ description: A Helm chart to configure the golang-based external-secrets.
 keywords:
 - pattern
 name: golang-external-secrets
-version: 0.1.2
+version: 0.1.3
 dependencies:
   - name: external-secrets
-    version: "0.10.0"
+    version: "0.10.2"
     repository: "https://charts.external-secrets.io"
     #"https://external-secrets.github.io/kubernetes-external-secrets"
 
