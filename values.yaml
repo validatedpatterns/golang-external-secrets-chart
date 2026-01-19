@@ -63,8 +63,9 @@ global:
     backend: "vault"
 
 clusterGroup:
-  # -- The variable that defines when a cluster is the HUB
-  isHubCluster: true
+  applications: {}
+  # -- (DEPRECATED) The variable that defines when a cluster is the HUB
+  # isHubCluster: true
 
 # -- A few settings containing which images are being used
 # @default -- depends on the individual settings

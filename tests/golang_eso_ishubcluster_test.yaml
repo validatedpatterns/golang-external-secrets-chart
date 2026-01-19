@@ -1,0 +1,137 @@
+suite: Test golang_eso.ishubcluster helper function
+templates:
+  - templates/kubernetes/golang-external-secrets-hub-role.yaml
+release:
+  name: release-test
+tests:
+  # Test 1: When clusterGroup.isHubCluster is explicitly set to true
+  - it: should return true when clusterGroup.isHubCluster is explicitly set to true
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        hubClusterDomain: hub.example.com
+        localClusterDomain: edge.example.com
+      clusterGroup:
+        isHubCluster: true
+    asserts:
+      - hasDocuments:
+          count: 1
+      - containsDocument:
+          kind: Role
+          apiVersion: rbac.authorization.k8s.io/v1
+          name: golang-external-secrets
+          namespace: validated-patterns-secrets
+
+  # Test 2: When clusterGroup.isHubCluster is explicitly set to false
+  - it: should return false when clusterGroup.isHubCluster is explicitly set to false
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        hubClusterDomain: hub.example.com
+        localClusterDomain: hub.example.com
+      clusterGroup:
+        isHubCluster: false
+    asserts:
+      - hasDocuments:
+          count: 0
+
+  # Test 3: When isHubCluster is not set and domains are equal - should be hub
+  - it: should return true when isHubCluster is not set and localClusterDomain equals hubClusterDomain
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        hubClusterDomain: hub.example.com
+        localClusterDomain: hub.example.com
+    asserts:
+      - hasDocuments:
+          count: 1
+      - containsDocument:
+          kind: Role
+          apiVersion: rbac.authorization.k8s.io/v1
+          name: golang-external-secrets
+          namespace: validated-patterns-secrets
+
+  # Test 4: When isHubCluster is not set and domains are different - should not be hub
+  - it: should return false when isHubCluster is not set and localClusterDomain differs from hubClusterDomain
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        hubClusterDomain: hub.example.com
+        localClusterDomain: edge.example.com
+    asserts:
+      - hasDocuments:
+          count: 0
+
+  # Test 5: When localClusterDomain is not set - should default to hubClusterDomain and be hub
+  - it: should return true when localClusterDomain is not set (defaults to hubClusterDomain)
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        hubClusterDomain: hub.example.com
+    asserts:
+      - hasDocuments:
+          count: 1
+      - containsDocument:
+          kind: Role
+          apiVersion: rbac.authorization.k8s.io/v1
+          name: golang-external-secrets
+          namespace: validated-patterns-secrets
+
+  # Test 6: When hubClusterDomain is not set - should return false
+  - it: should return false when hubClusterDomain is not set
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        localClusterDomain: edge.example.com
+    asserts:
+      - hasDocuments:
+          count: 0
+
+  # Test 7: When neither domain is set - should return false
+  - it: should return false when neither hubClusterDomain nor localClusterDomain is set
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        hubClusterDomain: null
+        localClusterDomain: null
+    asserts:
+      - hasDocuments:
+          count: 0
+
+  # Test 8: When isHubCluster is null - should fall back to domain comparison
+  - it: should fall back to domain comparison when isHubCluster is null
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        hubClusterDomain: hub.example.com
+        localClusterDomain: hub.example.com
+      clusterGroup:
+        isHubCluster: null
+    asserts:
+      - hasDocuments:
+          count: 1
+      - containsDocument:
+          kind: Role
+          apiVersion: rbac.authorization.k8s.io/v1
+          name: golang-external-secrets
+          namespace: validated-patterns-secrets
+
+  # Test 9: Edge case - empty string values
+  - it: should handle empty string values properly
+    set:
+      global:
+        secretStore:
+          backend: "kubernetes"
+        hubClusterDomain: ""
+        localClusterDomain: ""
+    asserts:
+      - hasDocuments:
+          count: 0
