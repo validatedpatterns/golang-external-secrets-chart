@@ -1,6 +1,6 @@
 # golang-external-secrets
 
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square)
 
 A Helm chart to configure the golang-based external-secrets.
 
@@ -18,7 +18,7 @@ This chart is used by the Validated Patterns to set up the external secrets
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.external-secrets.io | external-secrets | 0.10.2 |
+| https://charts.external-secrets.io | external-secrets | 0.16.2 |
 
 ## Values
 
@@ -26,9 +26,9 @@ This chart is used by the Validated Patterns to set up the external secrets
 |-----|------|---------|-------------|
 | clusterGroup.applications | object | `{}` |  |
 | external-secrets | object | depends on the individual settings | A few settings containing which images are being used |
-| external-secrets.certController.image.tag | string | `"v0.10.2-ubi"` | Tag for the ESO certController image |
-| external-secrets.image.tag | string | `"v0.10.2-ubi"` | Tag for the ESO main image |
-| external-secrets.webhook.image.tag | string | `"v0.10.2-ubi"` | Tag for the ESO webhook image |
+| external-secrets.certController.image.tag | string | `"v0.16.2-ubi"` | Tag for the ESO certController image |
+| external-secrets.image.tag | string | `"v0.16.2-ubi"` | Tag for the ESO main image |
+| external-secrets.webhook.image.tag | string | `"v0.16.2-ubi"` | Tag for the ESO webhook image |
 | global | object | depends on the individual settings | The global namespace containes some globally used variables used in patterns |
 | global.clusterDomain | string | `"foo.example.com"` | The DNS entry for the cluster the chart is being rendered on |
 | global.hubClusterDomain | string | `"hub.example.com"` | The DNS entry for the hub cluster |
