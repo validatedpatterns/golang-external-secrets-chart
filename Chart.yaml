@@ -6,7 +6,7 @@ name: golang-external-secrets
 version: 0.2.0
 dependencies:
   - name: external-secrets
-    version: "0.16.2"
+    version: "1.0.0"
     repository: "https://charts.external-secrets.io"
     #"https://external-secrets.github.io/kubernetes-external-secrets"
 
